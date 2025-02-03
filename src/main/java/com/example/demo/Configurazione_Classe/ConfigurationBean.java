@@ -9,6 +9,7 @@ public class ConfigurationBean {
     //Qui mi creerò dei metodi per istanziare i miei beans
 
     @Bean //Qui uso l'annotazione Bean per indicare a java di che cosa si tratta.
+    @Scope("singleton") //questo è il default, ma se istanziamo più di un bean è necessario chiamarli come Prototype.
     public User_Class user() {
         return new User_Class("Maria", "Bianchi");
     }

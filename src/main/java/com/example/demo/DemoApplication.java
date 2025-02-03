@@ -51,6 +51,9 @@ public class DemoApplication {
         //Creo anche qui un container dove gestire il ciclo di vita di Bean (oggetto) tramite Spring.
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(ConfigurationBean.class);
 
+        //Per stampare lo spazio di memoria, togliere l'override del toString oppure usa:
+        //System.out.println("Memory address of u1: " + System.identityHashCode(u1));
+
         // Recupero il Bean senza parametri tramite la classe ConfigurationBean
         User_Class u1 = (User_Class) applicationContext.getBean("user");
         System.out.println(u1);
