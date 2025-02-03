@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.Configurazione_Classe.ConfigurationBean;
+import com.example.demo.Configurazione_Classe.User_Class;
 import com.example.demo.Configurazione_XML.User_XML;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -23,13 +25,13 @@ public class DemoApplication {
 
         //METODO DUE ---------------------------------------------------
         //Configurazione tramite classe
-
+        config_Class();
 
         //METODO TRE ---------------------------------------------------
         //Config. tramite component
     }
 
-    public static void config_XML(){
+    public static void config_XML() {
         //Creo un Container (Context), dove gestire il ciclo di vita di Bean (oggetto) tramite Spring.
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
 
@@ -41,8 +43,15 @@ public class DemoApplication {
         applicationContext.close(); //Buona norma chiudere.
     }
 
-    public static void config_Class(){
-       AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+    public static void config_Class() {
+        //Creo anche qui un container dove gestire il ciclo di vita di Bean (oggetto) tramite Spring.
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(ConfigurationBean.class);
+
+        User_Class u = (User_Class) applicationContext.getBean("user");
+        System.out.println(u);
+
+        applicationContext.close();
     }
+
 
 }
