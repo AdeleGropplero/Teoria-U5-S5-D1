@@ -18,11 +18,9 @@ public class DemoApplication {
 
         System.out.println("Run Forrest, Run!");
 
-
         //METODO UNO ---------------------------------------------------
         //Config. tramite file XML
         config_XML();
-
 
         //METODO DUE ---------------------------------------------------
         //Configurazione tramite classe
@@ -38,15 +36,15 @@ public class DemoApplication {
         ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
 
         User_XML u = (User_XML) applicationContext.getBean("user_XML"); //facciamo il cast,
-        // perchè per java di default è un Object ma noi sappiamo che è di tipo user
+        // Perchè per java di default è un Object ma noi sappiamo che è di tipo user
         // quindi ci prendiamo la responsabilità del cast.
         System.out.println(u);
 
         applicationContext.close(); //Buona norma chiudere.
 
-        //Meno veloce e performante, non puoi gestire la logica ma è molto leggibile
+        // Meno veloce e performante, non puoi gestire la logica ma è molto leggibile
         // per programmatori non java o altri colleghi non dev.
-        //Migliore quando deve interagire con altri linguaggi.
+        // Migliore quando deve interagire con altri linguaggi.
     }
 
     public static void config_Class() {
@@ -60,18 +58,20 @@ public class DemoApplication {
         User_Class u2 = (User_Class) applicationContext.getBean("userParam", "Marco", "Verdi");
         System.out.println(u2);
 
+        // Chiudo il container
         applicationContext.close();
 
-        //Medio veloce ma ottimo se devi gestire la logica.
+        // Medio veloce ma ottimo se devi gestire la logica.
+        // Probabilmente il più utilizzato.
     }
 
     public static void config_Component() {
-        //Creo anche qui un container dove gestire il ciclo di vita di Bean (oggetto) tramite Spring.
-        //Questa volta non passo ne la classe (che non esiste), ne la location del file xml.
-        //Non passo nulla ma:
+        // Creo anche qui un container dove gestire il ciclo di vita di Bean (oggetto) tramite Spring.
+        // Questa volta non passo ne la classe (che non esiste), ne la location del file xml.
+        // Non passo nulla ma:
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
 
-        //Devo dargli indicazione di dove cercare il @Compontent
+        // Devo dargli indicazione di dove cercare il @Compontent
         applicationContext.scan("com.example.demo.Configurazione_Component");
         applicationContext.refresh();
 
@@ -83,10 +83,10 @@ public class DemoApplication {
         User_component u2 = (User_component) applicationContext.getBean("UserComponent", "Chiara", "LaPiuBella");
         System.out.println(u2);
 
-        //Chiudo il container
+        // Chiudo il container
         applicationContext.close();
 
-        //Più veloce ma non puoi gestire controlli
+        // Più veloce ma non puoi gestire controlli
 
     }
 
